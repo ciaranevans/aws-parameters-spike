@@ -8,4 +8,4 @@ awsParameterStoreSource:
 
 super:
   secret:
-    value: "poop"
+    value: ${/my/super/secret}
