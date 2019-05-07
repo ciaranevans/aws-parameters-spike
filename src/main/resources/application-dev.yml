@@ -1,0 +1,6 @@
+awsParameterStorePropertySource:
+  enabled: false
+
+super:
+  secret:
+    value: "poop - dev"

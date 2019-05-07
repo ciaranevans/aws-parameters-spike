@@ -1,0 +1,11 @@
+awsParameterStorePropertySource:
+  enabled: true
+
+awsParameterStoreSource:
+  ssmClient:
+    endpointConfiguration:
+      signingRegion: "eu-west-1"
+
+super:
+  secret:
+    value: "poop"
