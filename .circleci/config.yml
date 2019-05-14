@@ -7,11 +7,17 @@ jobs:
     steps:
       - checkout
       - run: mvn clean install
+      - persist_to_workspace:
+          root: target
+          paths:
+            - aws-parameters-spike-0.0.1-SNAPSHOT.jar
   publish:
     docker:
       - image: circleci/buildpack-deps
     steps:
       - checkout
+      - attach_workspace:
+          - at: target
       - setup_remote_docker:
           docker_layer_caching: true
       - run : docker login -u $DOCKER_HUB_USER -p $DOCKER_HUB_PASSWORD
@@ -24,4 +30,6 @@ workflows:
   ci:
     jobs:
       - build
-      - publish
+      - publish:
+          requires:
+            - build
