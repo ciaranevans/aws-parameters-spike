@@ -1,0 +1,16 @@
+version: 2
+
+jobs:
+  build:
+    docker:
+      - image: circleci/openjdk:11-jdk
+    steps:
+      - checkout
+      - run: mvn clean install
+
+workflows:
+  version: 2
+
+  ci:
+    jobs:
+      - build
