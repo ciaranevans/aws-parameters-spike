@@ -1,5 +1,10 @@
-FROM openjdk:8-jdk-alpine
-VOLUME /tmp
-ADD target/aws-parameters-spike-0.0.1-SNAPSHOT.jar app.jar
+FROM maven:3.6.1-jdk-11 as build
+COPY src /usr/src/app/src
+COPY pom.xml /usr/src/app
+WORKDIR /usr/src/app
+RUN mvn clean install
+
+FROM openjdk:11.0.3-jdk
+COPY --from=build /usr/src/app/target/*.jar /usr/app/application.jar
 EXPOSE 8080
-ENTRYPOINT ["java","-jar","/app.jar"]
+ENTRYPOINT ["java","-jar","/usr/app/application.jar"]

@@ -1,23 +1,11 @@
 version: 2
 
 jobs:
-  build:
-    docker:
-      - image: circleci/openjdk:11-jdk
-    steps:
-      - checkout
-      - run: mvn clean install
-      - persist_to_workspace:
-          root: /tmp/workspace
-          paths:
-            - target/aws-parameters-spike-0.0.1-SNAPSHOT.jar
   publish:
     docker:
       - image: circleci/buildpack-deps
     steps:
       - checkout
-      - attach_workspace:
-          - at: /tmp/workspace
       - setup_remote_docker:
           docker_layer_caching: true
       - run : docker login -u $DOCKER_HUB_USER -p $DOCKER_HUB_PASSWORD
@@ -29,7 +17,4 @@ workflows:
 
   ci:
     jobs:
-      - build
-      - publish:
-          requires:
-            - build
+      - publish
