@@ -8,6 +8,8 @@ jobs:
       - checkout
       - run: mvn clean install
   publish:
+    docker:
+      - image: circleci/buildpack-deps
     steps:
       - checkout
       - setup_remote_docker:
