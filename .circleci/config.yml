@@ -7,6 +7,14 @@ jobs:
     steps:
       - checkout
       - run: mvn clean install
+  publish:
+    steps:
+      - checkout
+      - setup_remote_docker:
+          docker_layer_caching: true
+      - run : docker login -u $DOCKER_HUB_USER -p $DOCKER_HUB_PASSWORD
+      - run : docker build -t $IMAGE_NAME:latest .
+      - run : docker push $IMAGE_NAME:latest
 
 workflows:
   version: 2
@@ -14,3 +22,4 @@ workflows:
   ci:
     jobs:
       - build
+      - publish
