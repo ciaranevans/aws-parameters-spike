@@ -6,5 +6,5 @@ RUN mvn clean install
 
 FROM adoptopenjdk/openjdk11:alpine-jre
 COPY --from=build /usr/src/app/target/*.jar /usr/app/application.jar
-EXPOSE 80
+EXPOSE 8080
 ENTRYPOINT ["java","-jar","/usr/app/application.jar"]

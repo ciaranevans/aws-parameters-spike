@@ -2,4 +2,4 @@ spring:
   profiles:
     active: ${ACTIVE_PROFILE:dev}
 server:
-  port: 80
+  port: 8080
