@@ -14,11 +14,12 @@ jobs:
       - run : docker build -t $IMAGE_NAME:latest .
       - run : docker push $IMAGE_NAME:latest
   deploy:
-    - aws-ecs/deploy-service-update:
-        aws-region: ${AWS_DEFAULT_REGION}
-        family: ciarans-service
-        cluster-name: aws-parameter-spike-cluster
-        container-image-name-updates: container=${IMAGE_NAME},tag=latest
+    steps:
+      - aws-ecs/deploy-service-update:
+          aws-region: ${AWS_DEFAULT_REGION}
+          family: ciarans-service
+          cluster-name: aws-parameter-spike-cluster
+          container-image-name-updates: container=${IMAGE_NAME},tag=latest
 
 
 workflows:
