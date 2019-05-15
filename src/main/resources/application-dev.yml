@@ -3,4 +3,4 @@ awsParameterStorePropertySource:
 
 super:
   secret:
-    value: "A secret"
+    value: "A secret for the review"
