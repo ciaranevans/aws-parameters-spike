@@ -3,4 +3,4 @@ awsParameterStorePropertySource:
 
 super:
   secret:
-    value: "poop - dev"
+    value: "poop - dev - autodeployed"

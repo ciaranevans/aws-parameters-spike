@@ -1,4 +1,6 @@
 version: 2
+orbs:
+  aws-ecs: circleci/aws-ecs@0.0.8
 
 jobs:
   publish:
@@ -11,6 +13,13 @@ jobs:
       - run : docker login -u $DOCKER_HUB_USER -p $DOCKER_HUB_PASSWORD
       - run : docker build -t $IMAGE_NAME:latest .
       - run : docker push $IMAGE_NAME:latest
+  deploy:
+    - aws-ecs/deploy-service-update:
+        aws-region: ${AWS_DEFAULT_REGION}
+        family: ciarans-service
+        cluster-name: aws-parameter-spike-cluster
+        container-image-name-updates: container=${IMAGE_NAME},tag=latest
+
 
 workflows:
   version: 2
@@ -18,3 +27,6 @@ workflows:
   ci:
     jobs:
       - publish
+      - deploy:
+          requires:
+            - publish
