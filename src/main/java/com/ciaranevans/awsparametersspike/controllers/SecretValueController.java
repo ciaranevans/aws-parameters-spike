@@ -14,7 +14,7 @@ public class SecretValueController {
     @GetMapping("/getSecretValue")
     @ResponseBody
     public String getSecretValue() {
-        return "My super value is: " + secretValue;
+        return "My super dooper secret value is: " + secretValue;
     }
 
 }
