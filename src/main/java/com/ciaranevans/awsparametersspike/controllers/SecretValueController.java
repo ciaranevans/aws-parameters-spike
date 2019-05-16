@@ -14,7 +14,7 @@ public class SecretValueController {
     @GetMapping("/getSecretValue")
     @ResponseBody
     public String getSecretValue() {
-        return secretValue;
+        return "My secret value is: " + secretValue;
     }
 
 }
