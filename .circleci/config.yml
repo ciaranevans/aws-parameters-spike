@@ -21,3 +21,10 @@ workflows:
   cd:
     jobs:
       - publish
+      - aws-ecs/deploy-service-update:
+          requires:
+            - publish
+          aws-region: ${AWS_DEFAULT_REGION}
+          family: aws-parameters-spike
+          cluster-name: aws-parameters-spike-cluster
+          container-image-name-updates: container=aws-parameters-spike,tag=latest
